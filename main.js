@@ -190,6 +190,7 @@ class Imow extends utils.Adapter {
   }
 
   async login() {
+    this.log.debug("CE - Logging in")
     const formField = await this.requestClient({
       method: "get",
       url: "https://oauth2.imow.stihl.com/authorization/?response_type=token&client_id=59714950-DD44-45E0-8A2F-6A93504A3C89&state=9185387873156676264&redirect_uri=stihl-imow-ios://",
