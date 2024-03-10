@@ -205,6 +205,8 @@ class Imow extends utils.Adapter {
         return this.extractHidden(res.data);
       })
       .catch((error) => {
+        this.log.error(error);
+        this.log.error(error.message);
         if (error && error.message === "Unsupported protocol stihl-imow-ios:") {
           this.session = qs.parse(error.request._options.path.split("?")[1]);
           this.log.debug("Refresh successful");
