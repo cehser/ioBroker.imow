@@ -226,7 +226,7 @@ class Imow extends utils.Adapter {
       return;
     }
 
-    this.log.debug("CE - start oautj2  authentication")
+    this.log.debug("CE - start oauth2  authentication")
     await this.requestClient({
       method: "post",
       url: "https://oauth2.imow.stihl.com/authentication/authenticate/?lang=de",
@@ -252,7 +252,9 @@ class Imow extends utils.Adapter {
         this.log.error(JSON.stringify(res.data));
       })
       .catch((error) => {
-        if (error && error.message === "Unsupported protocol stihl-imow-ios:") {
+        //Redirected request failed: Unsupported protocol stihl-imow-ios:
+        //if (error && error.message === "Unsupported protocol stihl-imow-ios:") {
+        if (error && error.message === "Redirected request failed: Unsupported protocol stihl-imow-ios:") {
           this.session = qs.parse(error.request._options.path.split("?")[1]);
           this.log.info("Login successful");
           this.setState("info.connection", true, true);
