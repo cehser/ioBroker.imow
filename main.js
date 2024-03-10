@@ -226,6 +226,7 @@ class Imow extends utils.Adapter {
       return;
     }
 
+    this.log.debug("CE - start oautj2  authentication")
     await this.requestClient({
       method: "post",
       url: "https://oauth2.imow.stihl.com/authentication/authenticate/?lang=de",
@@ -258,6 +259,8 @@ class Imow extends utils.Adapter {
           return;
         }
         this.log.error(error);
+        this.log.error("CE - error message:");
+        this.log.error(error.message);
         error.response && this.log.error(JSON.stringify(error.response.data));
       });
   }
